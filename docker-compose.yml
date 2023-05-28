@@ -1,0 +1,77 @@
+services:
+  # store-front:
+  #   build: ./store-front/frontend
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - store-front:/app
+  #     - sf-node_modules:/app/node_modules
+  #   command: npm run dev
+  
+  # admin-dashboard:
+  #   build: ./admin-dashboard/frontend
+  #   ports:
+  #     - "4000:4000"
+  #   volumes:
+  #     - admin-dashboard:/app
+  #     - ad-node_modules:/app/node_modules
+  #   depends_on:
+  #     - dashboard-auth
+  #   command: npm run dev
+  
+  product-catalog:
+    image: mariadb
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: PRODUCT_CATALOG
+    volumes:
+      - product-catalog_data:/var/lib/mysql
+
+  # product-catalog-search-idx:
+  #   image: solr:9.0
+  #   ports:
+  #     - 8983:8983
+  #   volumes:
+  #     - product-catalog-data:/var/lib/solr
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${POSTGRESQL_DB}
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASS}
+    volumes:
+      - dasboard-auth_data:/var/lib/postgres
+    networks:
+      - local-keycloak
+
+  dashboard-auth:
+    image: bitnami/keycloak:latest
+    ports:
+      - 5050:8080
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_DATABASE: ${POSTGRESQL_DB}
+      DB_USER: ${POSTGRESQL_USER}
+      DB_PASSWORD: ${POSTGRESQL_PASS}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_USER}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASS}
+    depends_on:
+      - postgres
+    networks:
+      - local-keycloak
+
+volumes:
+  store-front:
+  admin-dashboard:
+  ad-node_modules:
+  sf-node_modules:
+  product-catalog_data:
+  dasboard-auth_data:
+
+networks:
+  local-keycloak:
