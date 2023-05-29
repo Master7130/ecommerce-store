@@ -1,9 +1,7 @@
-import "./App.css";
-
 function Dashboard() {
   return (
     <>
-      <div>Dashboard</div>
+      <div className="text-xl">Dashboard</div>
     </>
   );
 }
