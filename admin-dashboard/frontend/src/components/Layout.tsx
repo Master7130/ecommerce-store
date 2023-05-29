@@ -1,11 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Navbar from "./Navbar";
 
 export default function Layout({ children }: any) {
@@ -43,7 +36,7 @@ export default function Layout({ children }: any) {
 
   return (
     <main className="flex flex-row h-screen" ref={ref}>
-      <Navbar theme={theme} setTheme={updateTheme} />
+      <Navbar setTheme={updateTheme} />
       {children}
     </main>
   );

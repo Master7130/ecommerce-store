@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Switch from "@radix-ui/react-switch";
 
-export default function Navbar({ theme, setTheme }: any) {
+export default function Navbar({ setTheme }: any) {
   const [checked, setChecked] = useState(true);
 
   const checkedChange = useCallback(() => {
@@ -13,7 +13,7 @@ export default function Navbar({ theme, setTheme }: any) {
     else localStorage.theme = "dark";
 
     console.log(localStorage.theme);
-  }, [checked]);
+  }, [checked, setTheme]);
 
   useEffect(() => {
     if (localStorage.theme == "dark" || !("theme" in localStorage))
