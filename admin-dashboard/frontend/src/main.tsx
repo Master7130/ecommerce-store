@@ -1,8 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React, { useRef } from "react";
+import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from './App.tsx'
-import Dashboard from './Dashboard.tsx';
+import App from "./App.tsx";
+import Dashboard from "./Dashboard.tsx";
+import Layout from "./components/Layout.tsx";
+import Navbar from "./components/Navbar";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -18,6 +20,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Layout>
+      <RouterProvider router={router} />
+    </Layout>
   </React.StrictMode>
 );
