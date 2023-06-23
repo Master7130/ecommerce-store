@@ -35,9 +35,9 @@ export default function Layout({ children }: any) {
   }, [theme]);
 
   return (
-    <main className="flex flex-row h-screen" ref={ref}>
+    <main className="flex flex-row gap-x-10 h-screen" ref={ref}>
       <Navbar setTheme={updateTheme} />
-      {children}
+      <div className="w-full p-10">{children}</div>
     </main>
   );
 }

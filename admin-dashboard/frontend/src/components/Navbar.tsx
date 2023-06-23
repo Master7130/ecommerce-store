@@ -24,16 +24,16 @@ export default function Navbar({ setTheme }: any) {
   return (
     <NavigationMenu.Root
       orientation="vertical"
-      className="w-[20%] border-r-2 text-center p-7 flex flex-col justify-between py-32"
+      className="w-[20%] border-r-2 text-center p-7 flex flex-col justify-between py-32 divide-y"
     >
       <NavigationMenu.List>
         <NavItem name="Overview" link="/dashboard" />
-        <NavItem name="Products" link="/dashboard" />
-        <NavItem name="Customers" link="/dashboard" />
+        <NavItem name="Products" link="/products" />
+        <NavItem name="Customers" link="/customers" />
         <NavItem name="Orders" link="/dashboard" />
       </NavigationMenu.List>
-      <NavigationMenu.List className="block space-y-5">
-        <NavItem name="Overview" link="/dashboard" />
+      <NavigationMenu.List className="block space-y-5 py-5">
+        <NavItem name="Log out" link="/dashboard" />
         <NavigationMenu.Item>
           <div>Dark mode</div>
           <Switch.Root
