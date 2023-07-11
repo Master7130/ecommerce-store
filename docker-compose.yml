@@ -26,6 +26,7 @@ services:
       - 3306:3306
     environment:
       MARIADB_ROOT_PASSWORD: pass
+      MYSQL_ROOT_HOST: '%'
       MYSQL_DATABASE: PRODUCT_CATALOG
     volumes:
       - product-catalog_data:/var/lib/mysql

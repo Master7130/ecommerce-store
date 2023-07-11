@@ -4,7 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import Customers from "./pages/Customers.tsx";
-import Products from "./components/Products.tsx";
+import Products from "./pages/products/Products.tsx";
+import Add from "./pages/products/Add.tsx";
 import Layout from "./components/Layout.tsx";
 import "./index.css";
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/products",
     element: <Products />,
+  },
+  {
+    path: "/products/add",
+    element: <Add />,
   },
 ]);
 
