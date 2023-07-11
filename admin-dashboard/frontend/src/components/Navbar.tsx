@@ -7,7 +7,7 @@ export default function Navbar({ setTheme }: any) {
 
   const checkedChange = useCallback(() => {
     setChecked(!checked);
-    setTheme(checked)
+    setTheme(checked);
     if (localStorage.theme == "dark") localStorage.theme = "light";
     else if (localStorage.theme != "dark") localStorage.theme = "dark";
     else localStorage.theme = "dark";
@@ -27,13 +27,21 @@ export default function Navbar({ setTheme }: any) {
       className="w-[20%] border-r-2 text-center p-7 flex flex-col justify-between py-32 divide-y"
     >
       <NavigationMenu.List>
-        <NavItem name="Overview" link="/dashboard" />
-        <NavItem name="Products" link="/products" />
-        <NavItem name="Customers" link="/customers" />
-        <NavItem name="Orders" link="/dashboard" />
+        {[
+          ["Overview", "/dashboard"],
+          ["Products", "/products"],
+          ["Customers", "/customers"],
+          ["Orders", "/dashboard"],
+        ].map(([title, url]) => (
+          <NavigationMenu.Link className="text-xl" href={url}>
+            <NavItem name={title} />
+          </NavigationMenu.Link>
+        ))}
       </NavigationMenu.List>
       <NavigationMenu.List className="block space-y-5 py-5">
-        <NavItem name="Log out" link="/dashboard" />
+        <NavigationMenu.Link className="text-xl" href="/dashboard">
+          <NavItem name="Logout" />
+        </NavigationMenu.Link>
         <NavigationMenu.Item>
           <div>Dark mode</div>
           <Switch.Root
@@ -51,15 +59,12 @@ export default function Navbar({ setTheme }: any) {
 
 interface NavItemProps {
   name: string;
-  link: string;
 }
 
-function NavItem({ name, link }: NavItemProps) {
+function NavItem({ name }: NavItemProps) {
   return (
     <NavigationMenu.Item className="py-3 hover:bg-gray-100 rounded-md transition-all duration-150">
-      <NavigationMenu.Link className="text-xl" href={link}>
-        {name}
-      </NavigationMenu.Link>
+      {name}
     </NavigationMenu.Item>
   );
 }
