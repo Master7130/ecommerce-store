@@ -1,4 +1,4 @@
-package com.ecommerce.admin;
+package com.ecommerce.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
