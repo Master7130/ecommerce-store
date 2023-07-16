@@ -26,7 +26,7 @@ export default function Products() {
         </button>
       </div>
       <div>
-        <Table data={data} />
+        <Table data={data} status={status} />
       </div>
     </div>
   );
