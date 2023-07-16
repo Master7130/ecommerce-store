@@ -34,7 +34,8 @@ export default function Products() {
 
 function useProducts() {
   return useQuery({
-    queryKey: ["posts"],
+    queryKey: ["products"],
+    refetchInterval: 30000,
     queryFn: async () => {
       const { data } = await axios.get(
         `${import.meta.env.VITE_PRODUCT_SERVICE}/products`
