@@ -32,8 +32,8 @@ export default function Navbar({ setTheme }: any) {
           ["Products", "/products"],
           ["Customers", "/customers"],
           ["Orders", "/dashboard"],
-        ].map(([title, url]) => (
-          <NavigationMenu.Link className="text-xl" href={url}>
+        ].map(([title, url], key) => (
+          <NavigationMenu.Link className="text-xl" href={url} key={key}>
             <NavItem name={title} />
           </NavigationMenu.Link>
         ))}
