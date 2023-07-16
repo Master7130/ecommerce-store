@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.admin.lib.ProductRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,9 +27,17 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    @RequestMapping(value = "/products", produces = MediaType.TEXT_EVENT_STREAM_VALUE, method = RequestMethod.GET)
-    public Flux<Product> findProducts() {
-        return productRepository.findProducts();
+    @RequestMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public Mono<String> findProducts() {
+        return productRepository.findProducts()
+                .collectList() // collect flux into list
+                .map(products -> {
+                    try {
+                        return new ObjectMapper().writeValueAsString(products);
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 
     @RequestMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
